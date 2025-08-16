@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guess The Number</title>
+  <style>
+    body {
+        background-color: lightcoral;
+        margin: 0;
+        font-family: 'Trebuchet MS', sans-serif;
+    }
+
+ 
+    .one {
+        text-align: center;
+        background-color: #ffe066; 
+        color: black;
+        font-weight: bold;
+        width: 100%;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    .one h1 {
+        margin: 0;
+        font-size: 2rem;
+    }
+
+    .one h3 {
+        margin: 5px 0 0 0;
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+    }
+
+   
+    .two {
+        margin-top: 100px;
+        text-align: center;
+    }
+
+   
+    #guessnumber {
+        width: 150px;
+        padding: 10px;
+        font-size: 1rem;
+        border: 3px solid grey;
+        border-radius: 8px;
+        outline: none;
+        text-align: center;
+        animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+        0%   { border-color: rgb(148, 18, 18); }
+        50%  { border-color: transparent; }
+        100% { border-color: rgb(138, 31, 90); }
+    }
+
+    
+    button {
+        background: black;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin-left: 10px;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #333;
+        transform: scale(1.05);
+    }
+
+    
+    #result {
+        margin-top: 20px;
+        font-weight: bold;
+    }
+
+    #score {
+        margin-top: 10px;
+        color: #0044ff;
+        font-weight: bold;
+    }
+
+    
+    footer {
+        margin-bottom: 0px;
+        text-align: center;
+        background: #ffe066;
+        color: black;
+        padding: 15px;
+        font-weight: bold;
+        font-size: 1.2rem;
+        box-shadow: 0 -4px 8px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="one">
+    <h1>Guess The Number</h1>
+    <h3>MINI GAME</h3>
+  </div>
+
+  <div class="two">
+    <input id="guessnumber">
+    <button onclick="functionCheck()">Check</button>
+    <p id="result">You Are Right/Wrong</p>
+    <p id="score">Score: 10</p>
+  </div>
+
+  <footer>Thanks For Playing</footer>
+
+  <script>
+    var guessnumber = document.getElementById("guessnumber")
+    var result = document.getElementById("result")
+    var score = document.getElementById("score")
+    var randomnumber = Math.floor(Math.random() * 10) + 1
+    var totalscore = 10
+    var chances = 0
+    var gameOver = false
+
+    function functionCheck() {
+        if (gameOver) return  
+
+        var enterednumber = parseInt(guessnumber.value)
+
+        if (randomnumber === enterednumber) {
+            result.textContent = "Right ✅"
+            alert("🎉 You Won!")
+            gameOver = true
+        } else {
+            chances++
+            totalscore--
+
+            if (chances >= 10) {
+                result.textContent = "Game Over ❌"
+                score.textContent = "Score: 0"
+                alert("Better luck next time!")
+                gameOver = true
+            } else {
+                result.textContent = "Wrong ❌"
+                score.textContent = "Score: " + totalscore
+            }
+        }
+    }
+  </script>
+
+</body>
+</html>
